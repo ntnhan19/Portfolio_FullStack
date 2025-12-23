@@ -48,6 +48,7 @@ func main() {
 	api := r.Group("/api")
 	{
 		api.GET("/projects", ctrl.GetProjects)
+		api.GET("/profile", ctrl.GetProfile)
 		api.POST("/seed", ctrl.CreateSampleData) // API để tạo data giả test nhanh
 	}
 
