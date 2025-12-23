@@ -24,3 +24,15 @@ go.work
 .DS_Store
 Thumbs.db
 
+# Node.js / Next.js
+node_modules/
+.next/
+out/
+build/
+dist/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
