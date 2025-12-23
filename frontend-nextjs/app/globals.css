@@ -2,13 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-  .prose {
-    --tw-prose-body: theme(colors.slate.300);
-    --tw-prose-headings: theme(colors.white);
-    --tw-prose-links: theme(colors.blue.400);
-    --tw-prose-code: theme(colors.blue.300);
-    --tw-prose-pre-bg: theme(colors.slate.800);
-    --tw-prose-quote-borders: theme(colors.blue.600);
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 10, 10, 10;
+  --background-end-rgb: 20, 20, 30;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: radial-gradient(circle at 50% 0%,
+      rgb(25, 25, 40) 0%,
+      rgb(5, 5, 10) 100%);
+  min-height: 100vh;
+}
+
+/* Custom Scrollbar cho ngầu */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f0f13;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #60a5fa;
+}
+
+/* Tiện ích Typography */
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500;
   }
 }
