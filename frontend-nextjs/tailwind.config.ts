@@ -16,7 +16,7 @@ const config: Config = {
         },
     },
     plugins: [
-        require('@tailwindcss/typography'), // Đăng ký plugin typography ở đây
+        require('@tailwindcss/typography'),
     ],
 };
 export default config;
