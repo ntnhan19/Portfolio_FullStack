@@ -82,7 +82,7 @@ func (ctrl *ProjectController) CreateSampleData(c *gin.Context) {
 			Description: "Ứng dụng AI Assistant hỗ trợ trả lời câu hỏi từ tài liệu PDF/DOCX sử dụng công nghệ RAG và Vector Database. Đồ án môn Trí tuệ nhân tạo.",
 			Content: `## 🎯 Bối cảnh dự án
 
-Đây là đồ án môn **Trí tuệ nhân tạo** học kỳ 2 năm 2024. Bài toán đặt ra: Sinh viên và giảng viên thường phải đọc hàng trăm trang tài liệu để tìm thông tin cần thiết. Làm sao để AI có thể "đọc hiểu" tài liệu và trả lời câu hỏi chính xác?
+Đây là dự án của học phần **Đồ Án Chuyên Ngành** học kỳ 1 năm 2025. Bài toán đặt ra: Sinh viên và giảng viên thường phải đọc hàng trăm trang tài liệu để tìm thông tin cần thiết. Làm sao để AI có thể "đọc hiểu" tài liệu và trả lời câu hỏi chính xác?
 
 ## 🏗️ Kiến trúc hệ thống
 
@@ -128,7 +128,7 @@ func (ctrl *ProjectController) CreateSampleData(c *gin.Context) {
 - ✅ Response time trung bình: 3-5 giây
 
 **Về mặt học thuật:**
-- Đạt điểm 9.5/10 cho môn Trí tuệ nhân tạo
+- Đạt điểm 9/10 cho học phần Đồ Án Chuyên Ngành
 - Được thầy đánh giá cao về khả năng apply lý thuyết vào thực tế
 - Present trước lớp và nhận feedback tích cực
 
@@ -162,16 +162,15 @@ Nếu có thêm thời gian, tôi muốn:
 			RepoURL:    "[https://github.com/ntnhan19/DocMentor](https://github.com/ntnhan19/DocMentor)",
 			ImageUrl:   "/images/projects/docmentor.png",
 			Highlights: "Academic Project,RAG Pipeline,Vector Search",
-			Duration:   "3 tháng (Sep - Dec 2024)",
+			Duration:   "3 tháng (Sep - Dec 2025)",
 			TeamSize:   "3 người",
 		},
 		{
 			Title:       "DHL Cinema - Hệ thống đặt vé xem phim Real-time",
 			Description: "Web application đặt vé xem phim với WebSocket, xử lý race condition khi nhiều người cùng chọn ghế. Đồ án môn Lập trình mạng.",
-			// 🔥 SỬA LỖI Ở ĐÂY: Dùng biến bt để nối chuỗi thay vì dùng \`
 			Content: `## 🎯 Bối cảnh dự án
 
-Đây là đồ án môn **Lập trình mạng** học kỳ 1 năm 2025. Giảng viên đặt yêu cầu: Xây dựng một hệ thống có tính năng real-time và phải xử lý được vấn đề race condition.
+Đây là dự án của học phần **Đồ Án Cơ Sở** học kỳ 1 năm 2024. Giảng viên đặt yêu cầu: Xây dựng một hệ thống có tính năng real-time và phải xử lý được vấn đề race condition.
 
 **Bài toán cụ thể:** Khi 100 người cùng lúc chọn 1 ghế trong rạp chiếu phim, làm sao đảm bảo chỉ 1 người book thành công?
 
@@ -276,8 +275,6 @@ await db.transaction(async (trx) => {
 ## 🏆 Kết quả đạt được
 
 - Điểm đồ án: 9.0/10
-- Đạt giải Ba trong cuộc thi "PIONE DREAM HACKATHON 2025"
-- Được thầy đề xuất là đồ án mẫu cho khóa sau
 
 ## 🎓 Reflection
 
@@ -291,7 +288,7 @@ Dự án này giúp tôi hiểu rằng:
 			ImageUrl:   "/images/projects/cinema.png",
 			Highlights: "Academic Project,Real-time System,Race Condition Handling",
 			Duration:   "3 tháng (Mar - Jun 2025)",
-			TeamSize:   "4 người",
+			TeamSize:   "3 người",
 		},
 	}
 	for _, p := range projects {

@@ -3,63 +3,32 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
-  /* Slate 900 */
-  --card: #ffffff;
-  --card-foreground: #0f172a;
-  --primary: #2563eb;
-  /* Blue 600 */
-  --muted: #f1f5f9;
-  /* Slate 100 */
-  --muted-foreground: #64748b;
-  /* Slate 500 */
-  --border: #e2e8f0;
-  /* Slate 200 */
+  --background: #f8fafc; /* Slate 50 */
+  --foreground: #0f172a; /* Slate 900 */
 }
 
 body {
   color: var(--foreground);
-  background-color: #f8fafc;
-  /* Slate 50 - Nền hơi xám nhẹ cho đỡ mỏi mắt */
+  background: var(--background);
   min-height: 100vh;
-  font-feature-settings: "rlig" 1, "calt" 1;
-  /* Font chữ hiển thị code đẹp hơn */
 }
 
-/* Hiệu ứng nền kỹ thuật (Grid Pattern) */
-.bg-grid-pattern {
-  background-image: linear-gradient(to right, #e2e8f0 1px, transparent 1px),
-    linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
+/* Nền Grid Pattern kỹ thuật */
+.bg-grid-slate {
   background-size: 40px 40px;
-  mask-image: linear-gradient(to bottom, transparent, 10%, white, 90%, transparent);
+  background-image: linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+                    linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
+  mask-image: linear-gradient(to bottom, transparent, 5%, white, 95%, transparent);
 }
 
-/* Custom Scrollbar */
+/* Scrollbar tinh tế */
 ::-webkit-scrollbar {
   width: 8px;
 }
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
 ::-webkit-scrollbar-thumb {
   background: #cbd5e1;
   border-radius: 4px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
-}
-
-@layer utilities {
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600;
-  }
-
-  /* Class tạo card nổi hiện đại */
-  .card-hover {
-    @apply transition-all duration-300 hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1 border border-slate-200 bg-white;
-  }
 }

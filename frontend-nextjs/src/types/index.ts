@@ -1,4 +1,3 @@
-// src/types/index.ts
 export interface Project {
   id: number;
   title: string;
@@ -9,13 +8,13 @@ export interface Project {
   repo_url: string;
   demo_url: string;
   image_url?: string;
-
-  // ⭐ THÊM MỚI
+  
+  // Các trường mới từ Backend
   metrics?: string;      // JSON string
-  highlights?: string;   // Comma-separated
+  highlights?: string;   // Comma-separated string
   duration?: string;
   team_size?: string;
-
+  
   created_at: string;
 }
 
@@ -23,7 +22,7 @@ export interface Certificate {
   id: number;
   name: string;
   issuer: string;
-  type: string; // "Title" | "Award" | "Course"
+  type: string;
   date: string;
   url?: string;
   image_url?: string;
@@ -34,8 +33,8 @@ export interface Activity {
   name: string;
   role: string;
   description: string;
-  date: string;
   image_url?: string;
+  date: string;
 }
 
 export interface Profile {
@@ -56,5 +55,4 @@ export interface BlogPost {
   cover_image: string;
   tags: string;
   date: string;
-  created_at: string;
 }
