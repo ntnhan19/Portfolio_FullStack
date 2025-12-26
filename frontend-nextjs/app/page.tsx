@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from 'react';
 import { getProfile, getProjects, getCertificates, getActivities, getBlogPosts } from '../src/lib/api';
 import { Profile, Project, Certificate, Activity, BlogPost } from '../src/types/index';
