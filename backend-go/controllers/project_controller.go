@@ -116,7 +116,7 @@ User Query → Vector Search → GPT-4 Generate Answer
 ## 🚀 Deployment
 
 Hệ thống được deploy trên:
-- Backend: Railway
+- Backend: Render
 - Frontend: Vercel
 - Vector DB: Pinecone Cloud
 
@@ -125,14 +125,14 @@ Hệ thống được deploy trên:
 1. **Chunking Strategy quan trọng**: Phải cân nhắc kỹ chunk size và overlap để không mất context
 2. **Prompt Engineering**: Thiết kế system prompt phù hợp giúp tăng 40% độ chính xác
 3. **Cost Optimization**: Sử dụng cache để giảm 60% chi phí API OpenAI`,
-			TechStack:  "Python, FastAPI, LangChain, OpenAI API, Pinecone, React.js",
+			TechStack:  "Python, FastAPI, LangChain, Gemini API, Pinecone, React.js",
 			Category:   "AI/LLM",
 			RepoURL:    "https://github.com/ntnhan19/DocMentor",
 			ImageUrl:   "/images/projects/docmentor.png",
 			Metrics:    `{"accuracy": "99%", "response_time": "<3s", "documents": "50+"}`,
 			Highlights: "AI-Powered,Vector Search,Production-Ready",
-			Duration:   "2 tháng",
-			TeamSize:   "Solo",
+			Duration:   "3 tháng",
+			TeamSize:   "3 người",
 		},
 		{
 			Title:       "DHL Cinema - Real-time Movie Ticket Booking",
@@ -223,11 +223,6 @@ await db.transaction(async (trx) => {
 artillery quick --count 1000 --num 10 http://localhost:3000/book-seat
 ` + fence + `
 
-## 🏆 Thành tích
-
-- 🥉 **Top 3 - PIONE DREAM HACKATHON 2025**
-- Được Ban giám khảo đánh giá cao về giải pháp xử lý concurrency
-
 ## 💡 Bài học kinh nghiệm
 
 1. **Redis Lock Pattern**: Phải set expire time hợp lý để tránh deadlock
@@ -274,16 +269,25 @@ artillery quick --count 1000 --num 10 http://localhost:3000/book-seat
 			Name:     "Networking Basics (CCNA)",
 			Issuer:   "Cisco Networking Academy",
 			Type:     "Course",
-			Date:     "Jan 2025",
+			Date:     "Dec 2026",
 			ImageUrl: "/images/certs/cisco_basics.jpg",
-			Url:      "https://www.credly.com/badges/your-badge-id",
+			Url:      "https://www.credly.com/badges/849ccbed-8429-4e57-a3be-e3177f447cce/public_url",
 		},
 		{
-			Name:     "JavaScript Essentials 1 & 2",
+			Name:     "JavaScript Essentials 1",
 			Issuer:   "Cisco Networking Academy",
 			Type:     "Course",
-			Date:     "Dec 2024",
+			Date:     "Dec 2026",
+			ImageUrl: "/images/certs/javascript1.jpg",
+			Url:      "https://www.credly.com/badges/04dcaaad-cc55-4403-af59-ad15cd36150f/public_url",
+		},
+		{
+			Name:     "JavaScript Essentials 2",
+			Issuer:   "Cisco Networking Academy",
+			Type:     "Course",
+			Date:     "Dec 2026",
 			ImageUrl: "/images/certs/javascript2.jpg",
+			Url:      "https://www.credly.com/badges/7b330edf-fa4c-46d6-ac25-74e50e2c3773/public_url",
 		},
 		{
 			Name:     "Top 3 - Genz's Thinking Contest",
@@ -296,7 +300,7 @@ artillery quick --count 1000 --num 10 http://localhost:3000/book-seat
 			Name:     "Top 3 - PIONE DREAM HACKATHON 2025",
 			Issuer:   "HUTECH University",
 			Type:     "Award",
-			Date:     "Jan 2025",
+			Date:     "Dec 2026",
 			ImageUrl: "/images/certs/pionehackathon.jpg",
 		},
 		{
@@ -315,17 +319,17 @@ artillery quick --count 1000 --num 10 http://localhost:3000/book-seat
 	activities := []models.Activity{
 		{
 			Name:        "Hội Thao Sinh Viên HUTECH 2024",
-			Role:        "Vận động viên - Đội Cầu Lông",
-			Description: "Tham gia thi đấu bộ môn Cầu Lông đôi nam nữ, đạt giải Khuyến khích. Đây là hoạt động giúp rèn luyện sức khỏe, tinh thần đồng đội và kết nối với bạn bè trong trường.",
+			Role:        "Cầu Thủ - Đội Đá bóng Nữ K22",
+			Description: "Tham gia thi đấu bộ môn Đá Bóng nữ, đạt giải nhì. Đây là hoạt động giúp rèn luyện sức khỏe, tinh thần đồng đội và kết nối với bạn bè trong trường.",
 			Date:        "Mar 2024",
 			ImageUrl:    "/images/activities/hoithao.jpg",
 		},
 		{
-			Name:        "Mùa Hè Xanh 2024 - Chiến dịch tình nguyện",
-			Role:        "Tình nguyện viên - Đội Tin học",
-			Description: "Tham gia đội hình dạy Tin học cơ bản cho trẻ em vùng cao, hỗ trợ chuyển đổi số cho chính quyền địa phương. Hoạt động kéo dài 2 tuần tại tỉnh Bình Phước.",
-			Date:        "Jul 2024",
-			ImageUrl:    "/images/activities/muahexanh.jpg",
+			Name:        "Tết Đầy Đủ - Xuân Trọn Vẹn",
+			Role:        "Tình nguyện viên - Liên Chi Hội Khoa Công Nghệ Thông Tin",
+			Description: "Hoàn thành 1 ngày tình nguyện tại chương trình 'Tết Đủ Đầy - Xuân Trọn Vẹn' - Gói quà tết",
+			Date:        "Jan 2025",
+			ImageUrl:    "/images/activities/tinhnguyenvien.png",
 		},
 	}
 	for _, a := range activities {

@@ -13,7 +13,6 @@ export default function AdvancedSkillsSection() {
             skills: [
                 { name: "Go (Golang)", level: 85, experience: "6 tháng" },
                 { name: "Node.js", level: 90, experience: "2 năm" },
-                { name: "C# .NET", level: 80, experience: "1 năm" },
             ]
         },
         {
@@ -32,7 +31,6 @@ export default function AdvancedSkillsSection() {
             color: "green",
             skills: [
                 { name: "PostgreSQL", level: 85, experience: "1.5 năm" },
-                { name: "Redis", level: 75, experience: "6 tháng" },
                 { name: "SQL Server", level: 80, experience: "1 năm" },
             ]
         },
@@ -41,9 +39,9 @@ export default function AdvancedSkillsSection() {
             icon: <Brain size={24} />,
             color: "pink",
             skills: [
-                { name: "LangChain", level: 80, experience: "6 tháng" },
-                { name: "OpenAI API", level: 85, experience: "8 tháng" },
-                { name: "Vector DB (Pinecone)", level: 75, experience: "4 tháng" },
+                { name: "LangChain", level: 70, experience: "3 tháng" },
+                { name: "Gemini API", level: 70, experience: "3 tháng" },
+                { name: "Vector DB (Pinecone)", level: 70, experience: "3 tháng" },
             ]
         },
         {
@@ -53,7 +51,6 @@ export default function AdvancedSkillsSection() {
             skills: [
                 { name: "Docker", level: 70, experience: "8 tháng" },
                 { name: "Git / GitHub", level: 90, experience: "3 năm" },
-                { name: "Linux", level: 75, experience: "1 năm" },
             ]
         },
         {
@@ -148,9 +145,9 @@ export default function AdvancedSkillsSection() {
             >
                 {[
                     { label: "Years Coding", value: "3+" },
-                    { label: "Projects Built", value: "15+" },
-                    { label: "Technologies", value: "20+" },
-                    { label: "GitHub Commits", value: "2000+" },
+                    { label: "Projects Built", value: "4+" },
+                    { label: "Technologies", value: "10+" },
+                    { label: "GitHub Commits", value: "1000+" },
                 ].map((stat, i) => (
                     <div key={i} className="bg-white/5 border border-white/10 rounded-xl p-4 text-center hover:bg-white/10 transition-colors">
                         <div className="text-3xl font-bold text-blue-400 mb-1">{stat.value}</div>

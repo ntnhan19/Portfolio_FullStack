@@ -89,7 +89,7 @@ export default function Home() {
 
           <div className="space-y-4">
             <h2 className="text-blue-400 font-medium tracking-[0.2em] uppercase text-sm">
-              Software Engineer Portfolio
+              Software Engineer
             </h2>
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
               <span className="text-white">{profile?.full_name?.split(' ').slice(0, -2).join(' ')} </span>
@@ -251,7 +251,7 @@ export default function Home() {
               <h4 className="text-xl font-bold text-white">HUTECH University</h4>
               <p className="text-purple-400 text-sm mb-2 font-mono">2022 - 2026</p>
               <p className="text-gray-300">Bachelor of Software Engineering</p>
-              <p className="text-gray-500 text-sm mt-1">GPA: 3.26/4.0</p>
+              <p className="text-gray-500 text-sm mt-1">GPA: 3.27/4.0</p>
             </div>
           </div>
         </motion.div>
