@@ -1,160 +1,92 @@
 import { motion } from 'framer-motion';
-import {
-    Code2, Database, Server, Globe,
-    Brain, GitBranch, Container
-} from 'lucide-react';
+import { Code2, Database, Server, Globe, Brain, GitBranch, Container, Layers } from 'lucide-react';
 
 export default function AdvancedSkillsSection() {
     const skillCategories = [
         {
-            title: "Backend Development",
+            title: "Backend & Core",
             icon: <Server size={24} />,
-            color: "blue",
+            color: "text-blue-600 bg-blue-50",
             skills: [
-                { name: "Go (Golang)", level: 85, experience: "6 tháng" },
-                { name: "Node.js", level: 90, experience: "2 năm" },
+                { name: "Go (Golang)", level: 85, desc: "High Perf, Gin, GORM" },
+                { name: "Node.js", level: 90, desc: "Event Loop, Express" },
+                { name: "C# .NET", level: 80, desc: "ASP.NET Core, MVC" },
             ]
         },
         {
-            title: "Frontend Development",
+            title: "Frontend & UI",
             icon: <Globe size={24} />,
-            color: "purple",
+            color: "text-purple-600 bg-purple-50",
             skills: [
-                { name: "Next.js / React", level: 85, experience: "1.5 năm" },
-                { name: "TypeScript", level: 80, experience: "1 năm" },
-                { name: "Tailwind CSS", level: 90, experience: "1.5 năm" },
+                { name: "Next.js / React", level: 85, desc: "SSR, Hooks, Redux" },
+                { name: "Tailwind CSS", level: 90, desc: "Responsive, Dark mode" },
+                { name: "TypeScript", level: 80, desc: "Strict Typing" },
             ]
         },
         {
-            title: "Database & Storage",
+            title: "Data & AI",
             icon: <Database size={24} />,
-            color: "green",
+            color: "text-emerald-600 bg-emerald-50",
             skills: [
-                { name: "PostgreSQL", level: 85, experience: "1.5 năm" },
-                { name: "SQL Server", level: 80, experience: "1 năm" },
+                { name: "PostgreSQL", level: 85, desc: "Complex Queries, Indexing" },
+                { name: "Redis", level: 75, desc: "Caching, Pub/Sub" },
+                { name: "RAG / LangChain", level: 70, desc: "Vector DB, LLM Integration" },
             ]
         },
         {
-            title: "AI & Machine Learning",
-            icon: <Brain size={24} />,
-            color: "pink",
-            skills: [
-                { name: "LangChain", level: 70, experience: "3 tháng" },
-                { name: "Gemini API", level: 70, experience: "3 tháng" },
-                { name: "Vector DB (Pinecone)", level: 70, experience: "3 tháng" },
-            ]
-        },
-        {
-            title: "DevOps & Tools",
+            title: "System & Tools",
             icon: <Container size={24} />,
-            color: "orange",
+            color: "text-orange-600 bg-orange-50",
             skills: [
-                { name: "Docker", level: 70, experience: "8 tháng" },
-                { name: "Git / GitHub", level: 90, experience: "3 năm" },
-            ]
-        },
-        {
-            title: "Network Programming",
-            icon: <GitBranch size={24} />,
-            color: "cyan",
-            skills: [
-                { name: "Socket.io (WebSocket)", level: 85, experience: "1 năm" },
-                { name: "TCP/IP", level: 75, experience: "8 tháng" },
-                { name: "HTTP/REST API", level: 90, experience: "2 năm" },
+                { name: "Docker", level: 75, desc: "Containerization" },
+                { name: "Socket.io", level: 85, desc: "Real-time Communication" },
+                { name: "Git / CI/CD", level: 80, desc: "GitHub Actions, Vercel" },
             ]
         },
     ];
 
-    const getColorClasses = (color: string) => {
-        const colors: Record<string, string> = {
-            blue: "from-blue-500 to-blue-600",
-            purple: "from-purple-500 to-purple-600",
-            green: "from-green-500 to-green-600",
-            pink: "from-pink-500 to-pink-600",
-            orange: "from-orange-500 to-orange-600",
-            cyan: "from-cyan-500 to-cyan-600",
-        };
-        return colors[color] || colors.blue;
-    };
-
     return (
-        <section className="max-w-6xl mx-auto mb-32 relative z-10">
+        <section className="max-w-6xl mx-auto mb-32 relative z-10 px-4">
             <div className="text-center mb-16">
-                <h2 className="text-4xl font-bold mb-4">
-                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-                        Technical Skills
-                    </span>
-                </h2>
-                <p className="text-gray-400 max-w-2xl mx-auto">
-                    Công nghệ và công cụ tôi sử dụng để xây dựng các giải pháp phần mềm chất lượng cao
+                <h2 className="text-3xl font-bold text-slate-900 mb-4">Technical Proficiency</h2>
+                <p className="text-slate-600 max-w-2xl mx-auto">
+                    Bộ công cụ kỹ thuật tôi sử dụng để giải quyết các vấn đề phức tạp.
                 </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {skillCategories.map((category, idx) => (
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {skillCategories.map((cat, idx) => (
                     <motion.div
                         key={idx}
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: idx * 0.1 }}
-                        className="bg-gray-900/50 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-white/20 transition-all"
+                        className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-lg transition-shadow"
                     >
-                        {/* Header */}
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className={`p-3 rounded-xl bg-gradient-to-br ${getColorClasses(category.color)} shadow-lg`}>
-                                <div className="text-white">
-                                    {category.icon}
-                                </div>
-                            </div>
-                            <h3 className="text-lg font-bold text-white">{category.title}</h3>
+                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${cat.color}`}>
+                            {cat.icon}
                         </div>
-
-                        {/* Skills List */}
+                        <h3 className="font-bold text-slate-900 mb-4">{cat.title}</h3>
                         <div className="space-y-4">
-                            {category.skills.map((skill, i) => (
+                            {cat.skills.map((skill, i) => (
                                 <div key={i}>
-                                    <div className="flex justify-between items-center mb-2">
-                                        <span className="text-sm font-medium text-gray-300">{skill.name}</span>
-                                        <span className="text-xs text-gray-500">{skill.experience}</span>
+                                    <div className="flex justify-between text-sm mb-1">
+                                        <span className="font-medium text-slate-700">{skill.name}</span>
                                     </div>
-
-                                    {/* Progress Bar */}
-                                    <div className="h-2 bg-white/5 rounded-full overflow-hidden">
-                                        <motion.div
-                                            initial={{ width: 0 }}
-                                            whileInView={{ width: `${skill.level}%` }}
-                                            viewport={{ once: true }}
-                                            transition={{ duration: 1, delay: idx * 0.1 + i * 0.1 }}
-                                            className={`h-full bg-gradient-to-r ${getColorClasses(category.color)} rounded-full`}
-                                        />
+                                    <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                                        <div
+                                            className="h-full bg-slate-900 rounded-full"
+                                            style={{ width: `${skill.level}%` }}
+                                        ></div>
                                     </div>
+                                    <p className="text-xs text-slate-500 mt-1">{skill.desc}</p>
                                 </div>
                             ))}
                         </div>
                     </motion.div>
                 ))}
             </div>
-
-            {/* Summary Stats */}
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4"
-            >
-                {[
-                    { label: "Years Coding", value: "3+" },
-                    { label: "Projects Built", value: "4+" },
-                    { label: "Technologies", value: "10+" },
-                    { label: "GitHub Commits", value: "1000+" },
-                ].map((stat, i) => (
-                    <div key={i} className="bg-white/5 border border-white/10 rounded-xl p-4 text-center hover:bg-white/10 transition-colors">
-                        <div className="text-3xl font-bold text-blue-400 mb-1">{stat.value}</div>
-                        <div className="text-sm text-gray-500">{stat.label}</div>
-                    </div>
-                ))}
-            </motion.div>
         </section>
     );
 }

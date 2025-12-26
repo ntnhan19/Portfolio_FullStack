@@ -2,14 +2,14 @@
 
 import { useEffect, useState } from 'react';
 import { getProfile, getProjects, getCertificates, getActivities, getBlogPosts } from '../src/lib/api';
-import { Profile, Project, Certificate, Activity, BlogPost } from '../src/types/index';
+import { Profile, Project, Certificate, Activity, BlogPost } from '../src/types';
 import ProjectCard from '../src/components/ProjectCard';
-import BlogSection from '../src/components/BlogSection';
-import AdvancedSkillsSection from '../src/components/AdvancedSkillsSection';
+import BlogSection from '@/src/components/BlogSection';
+import AdvancedSkillsSection from '@/src/components/AdvancedSkillsSection';
 import {
   Loader2, Terminal, GraduationCap, Briefcase,
   Trophy, Download, BadgeCheck, Star, HeartHandshake,
-  Calendar, MapPin, Mail, Github, Linkedin
+  Calendar, MapPin, Mail, Github, Linkedin, ArrowRight
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
@@ -47,277 +47,171 @@ export default function Home() {
   }, []);
 
   if (loading) return (
-    <div className="min-h-screen flex flex-col items-center justify-center text-blue-400 bg-[#0a0a0a]">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-white text-blue-600">
       <Loader2 className="w-10 h-10 animate-spin mb-4" />
-      <span className="text-sm font-medium tracking-widest uppercase opacity-70">Loading System...</span>
+      <span className="text-sm font-medium tracking-widest uppercase text-slate-500">Initializing...</span>
     </div>
   );
 
   return (
-    <main className="min-h-screen text-white px-6 md:px-12 py-20 overflow-hidden relative bg-[#0a0a0a]">
-      {/* Background Decoration */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px]" />
-      </div>
+    <main className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-blue-100 selection:text-blue-900">
+
+      {/* BACKGROUND PATTERN: Tạo cảm giác technical */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-[0.4] pointer-events-none h-[600px]"></div>
 
       {/* 1. HERO SECTION */}
-      <section className="max-w-5xl mx-auto mb-32 relative z-10 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="space-y-8"
-        >
-          {/* Avatar */}
-          <div className="relative inline-block mb-6 group">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full blur opacity-50 group-hover:opacity-75 transition-opacity duration-500"></div>
-            <div className="relative w-40 h-40 md:w-52 md:h-52 rounded-full border-4 border-gray-900 overflow-hidden shadow-2xl mx-auto bg-gray-800">
-              <Image
-                src="/avatar.jpg"
-                alt="Profile Avatar"
-                fill
-                className="object-cover hover:scale-105 transition-transform duration-500"
-                onError={(e) => { e.currentTarget.style.opacity = "0"; }}
-              />
-              <div className="absolute inset-0 flex items-center justify-center bg-[#111] -z-10">
-                <span className="text-6xl font-bold text-gray-700">{profile?.full_name?.charAt(0)}</span>
+      <section className="relative pt-32 pb-20 px-6">
+        <div className="max-w-5xl mx-auto text-center">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            {/* Avatar with Ring */}
+            <div className="relative inline-block mb-8">
+              <div className="absolute inset-0 bg-blue-500 rounded-full blur-2xl opacity-20"></div>
+              <div className="relative w-40 h-40 rounded-full p-1 bg-gradient-to-tr from-blue-500 to-indigo-500">
+                <div className="w-full h-full rounded-full overflow-hidden border-4 border-white bg-white">
+                  <Image src="/avatar.jpg" alt="Avatar" fill className="object-cover" />
+                </div>
               </div>
+              <div className="absolute bottom-2 right-2 bg-green-500 border-4 border-white w-6 h-6 rounded-full shadow-sm" title="Available for work"></div>
             </div>
-            <div className="absolute bottom-4 right-4 bg-green-500 border-4 border-gray-900 w-6 h-6 rounded-full" title="Open to work"></div>
-          </div>
 
-          <div className="space-y-4">
-            <h2 className="text-blue-400 font-medium tracking-[0.2em] uppercase text-sm">
-              Software Engineer
-            </h2>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
-              <span className="text-white">{profile?.full_name?.split(' ').slice(0, -2).join(' ')} </span>
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
-                {profile?.full_name?.split(' ').slice(-2).join(' ')}
-              </span>
+            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6">
+              {profile?.full_name}
             </h1>
-            <p className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto font-light leading-relaxed">
+            <p className="text-xl md:text-2xl text-slate-600 max-w-2xl mx-auto font-light mb-8">
               {profile?.title}
             </p>
-            <p className="text-gray-500 max-w-xl mx-auto">
-              {profile?.bio}
-            </p>
-            <div className="flex items-center justify-center text-gray-500 text-sm gap-2">
-              <MapPin size={16} /> Ho Chi Minh City, Vietnam
-            </div>
-          </div>
 
-          <div className="flex flex-col md:flex-row justify-center gap-4 pt-6">
-            <a href={profile?.github} target="_blank" className="px-8 py-3 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-all hover:scale-105 flex items-center justify-center">
-              <Terminal size={18} className="mr-2" /> GitHub Profile
-            </a>
-            <a href="/cv.pdf" download className="px-8 py-3 bg-blue-600 text-white font-medium rounded-full hover:bg-blue-700 transition-all hover:scale-105 flex items-center justify-center shadow-lg shadow-blue-500/30">
-              <Download size={18} className="mr-2" /> Download CV
-            </a>
-          </div>
-        </motion.div>
+            <div className="flex flex-wrap justify-center gap-4 text-sm text-slate-500 mb-10">
+              <span className="flex items-center gap-1 bg-white px-3 py-1 rounded-full shadow-sm border border-slate-200">
+                <MapPin size={14} /> Ho Chi Minh City
+              </span>
+              <span className="flex items-center gap-1 bg-white px-3 py-1 rounded-full shadow-sm border border-slate-200">
+                <GraduationCap size={14} /> GPA: 3.27/4.0
+              </span>
+            </div>
+
+            <div className="flex justify-center gap-4">
+              <a href={profile?.github} target="_blank" className="px-8 py-3 bg-slate-900 text-white font-semibold rounded-lg hover:bg-slate-800 transition-all flex items-center gap-2 shadow-lg shadow-slate-900/20">
+                <Github size={20} /> GitHub
+              </a>
+              <a href="/cv.pdf" download className="px-8 py-3 bg-white text-slate-900 font-semibold rounded-lg border border-slate-200 hover:border-blue-500 hover:text-blue-600 transition-all flex items-center gap-2 shadow-sm">
+                <Download size={20} /> Résumé
+              </a>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
-      {/* 2. PROJECTS */}
-      <section className="max-w-6xl mx-auto mb-32 relative z-10">
-        <div className="flex items-center mb-12">
-          <h2 className="text-3xl font-bold mr-4">Featured Projects</h2>
-          <div className="h-px bg-gray-800 flex-grow"></div>
-        </div>
+      {/* 2. ADVANCED SKILLS */}
+      <AdvancedSkillsSection />
 
-        {projects.length === 0 ? (
-          <div className="text-center py-20 border border-dashed border-gray-800 rounded-xl bg-white/5">
-            <p className="text-gray-500">Connecting to Database...</p>
+      {/* 3. PROJECTS */}
+      <section className="py-20 bg-white border-y border-slate-200">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex justify-between items-end mb-12">
+            <div>
+              <h2 className="text-3xl font-bold text-slate-900 mb-2">Featured Projects</h2>
+              <p className="text-slate-500">Các dự án thực tế với kiến trúc Complex System</p>
+            </div>
+            {/* Có thể thêm nút View All ở đây */}
           </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
             {projects.map((project, idx) => (
               <ProjectCard key={project.id} project={project} index={idx} />
             ))}
           </div>
-        )}
+        </div>
       </section>
 
-      {/* 3. ADVANCED SKILLS */}
-      <AdvancedSkillsSection />
-
-      {/* 4. CERTIFICATES */}
-      <section className="max-w-6xl mx-auto mb-32 relative z-10">
-        <div className="flex items-center mb-12">
-          <h2 className="text-3xl font-bold mr-4 flex items-center">
-            <Trophy className="mr-3 text-yellow-500" /> Honors & Certificates
-          </h2>
-          <div className="h-px bg-gray-800 flex-grow"></div>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {certs.map((cert, i) => (
-            <motion.div
-              key={cert.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="group relative bg-gray-900 border border-white/5 rounded-xl overflow-hidden hover:border-blue-500/50 transition-all hover:-translate-y-1 h-full flex flex-col"
-            >
-              <div className="absolute inset-0 h-32 overflow-hidden opacity-30 group-hover:opacity-50 transition-opacity">
-                {cert.image_url ? (
-                  <Image src={cert.image_url} alt={cert.name} fill className="object-cover filter blur-sm" />
-                ) : (
-                  <div className="w-full h-full bg-gradient-to-r from-blue-900 to-gray-900"></div>
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
+      {/* 4. EXPERIENCE & EDUCATION (Timeline Style) */}
+      <section className="py-20 max-w-5xl mx-auto px-6">
+        <div className="grid md:grid-cols-2 gap-16">
+          <div>
+            <h3 className="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-2">
+              <Briefcase className="text-blue-600" /> Experience
+            </h3>
+            <div className="space-y-8 border-l-2 border-slate-200 pl-8 relative">
+              {/* Item 1 */}
+              <div className="relative">
+                <span className="absolute -left-[39px] top-1 w-5 h-5 bg-white border-4 border-blue-600 rounded-full"></span>
+                <div className="mb-1 text-sm text-blue-600 font-bold">Apr 2025 - Jun 2025</div>
+                <h4 className="text-lg font-bold text-slate-900">Backend Developer Intern</h4>
+                <div className="text-slate-600 text-sm mb-2">Academic Project Team</div>
+                <p className="text-slate-500 text-sm">Xây dựng hệ thống IELTS LMS với kiến trúc Microservices cơ bản sử dụng ASP.NET Core.</p>
               </div>
+              {/* Item 2 */}
+              <div className="relative">
+                <span className="absolute -left-[39px] top-1 w-5 h-5 bg-white border-4 border-blue-600 rounded-full"></span>
+                <div className="mb-1 text-sm text-blue-600 font-bold">Mar 2025 - Present</div>
+                <h4 className="text-lg font-bold text-slate-900">Full-Stack Developer</h4>
+                <div className="text-slate-600 text-sm mb-2">Freelance</div>
+                <p className="text-slate-500 text-sm">Phát triển ứng dụng đặt vé realtime, tối ưu hóa database handling cho 1000+ users.</p>
+              </div>
+            </div>
+          </div>
 
-              <div className="relative p-6 pt-20 z-10 flex-grow flex flex-col">
-                <div className="flex justify-between items-start mb-3">
-                  <div className={`p-2 rounded-lg shadow-lg ${cert.type === 'Title' ? 'bg-yellow-500 text-black' :
-                      cert.type === 'Award' ? 'bg-purple-500 text-white' : 'bg-blue-600 text-white'
-                    }`}>
-                    {cert.type === 'Title' ? <Star size={20} /> :
-                      cert.type === 'Award' ? <Trophy size={20} /> : <BadgeCheck size={20} />}
+          <div>
+            <h3 className="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-2">
+              <Trophy className="text-yellow-600" /> Awards & Certs
+            </h3>
+            <div className="space-y-4">
+              {certs.slice(0, 4).map((cert) => (
+                <div key={cert.id} className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-start gap-4">
+                  <div className="mt-1 text-yellow-500"><BadgeCheck size={20} /></div>
+                  <div>
+                    <h4 className="font-bold text-slate-900 text-sm">{cert.name}</h4>
+                    <div className="text-xs text-slate-500">{cert.issuer} • {cert.date}</div>
                   </div>
                 </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
-                <h3 className="font-bold text-lg text-white mb-1 group-hover:text-blue-300 transition-colors">{cert.name}</h3>
-                <p className="text-sm text-gray-400 mb-2">{cert.issuer}</p>
-                <div className="mt-auto pt-4 border-t border-white/5 flex justify-between items-center text-xs text-gray-500">
-                  <span>Issued</span>
-                  <span className="font-mono bg-white/5 px-2 py-1 rounded">{cert.date}</span>
+      {/* 5. ACTIVITIES (Grid Card) */}
+      <section className="py-20 bg-slate-50 px-6">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl font-bold text-slate-900 mb-12 text-center">Activities & Life</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            {activities.map((act) => (
+              <div key={act.id} className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex gap-6 items-center">
+                <div className="w-24 h-24 flex-shrink-0 relative rounded-lg overflow-hidden bg-slate-100">
+                  {act.image_url && <Image src={act.image_url} alt={act.name} fill className="object-cover" />}
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900">{act.name}</h4>
+                  <div className="text-sm text-blue-600 font-medium mb-2">{act.role}</div>
+                  <p className="text-xs text-slate-500 line-clamp-2">{act.description}</p>
                 </div>
               </div>
-            </motion.div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* 5. ACTIVITIES */}
-      <section className="max-w-5xl mx-auto mb-32 relative z-10">
-        <div className="flex items-center mb-12">
-          <h2 className="text-3xl font-bold mr-4 flex items-center">
-            <HeartHandshake className="mr-3 text-pink-500" /> Activities & Volunteering
-          </h2>
-          <div className="h-px bg-gray-800 flex-grow"></div>
+      {/* 6. BLOG SECTION (Giữ nguyên logic, chỉ đổi style sáng) */}
+      <section className="py-20 max-w-6xl mx-auto px-6">
+        <div className="flex items-center justify-between mb-12">
+          <h2 className="text-3xl font-bold text-slate-900">Writing</h2>
+          <a href="#" className="text-blue-600 font-medium hover:underline flex items-center gap-1">View all posts <ArrowRight size={16} /></a>
         </div>
-
-        <div className="space-y-6">
-          {activities.map((act, i) => (
-            <motion.div
-              key={act.id}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="flex flex-col md:flex-row gap-6 bg-white/5 p-6 rounded-2xl border border-white/5 hover:bg-white/10 transition-colors group"
-            >
-              <div className="w-full md:w-56 h-40 flex-shrink-0 relative rounded-xl overflow-hidden bg-gray-800 border border-white/10">
-                {act.image_url ? (
-                  <Image src={act.image_url} alt={act.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                ) : (
-                  <div className="flex items-center justify-center h-full text-gray-600"><HeartHandshake size={32} /></div>
-                )}
-              </div>
-
-              <div className="flex-grow flex flex-col justify-center">
-                <div className="flex flex-wrap justify-between items-start mb-2 gap-2">
-                  <h3 className="text-xl font-bold text-white group-hover:text-pink-400 transition-colors">{act.name}</h3>
-                  <span className="text-xs font-mono text-gray-400 bg-white/5 px-3 py-1 rounded-full flex items-center">
-                    <Calendar size={12} className="mr-2" /> {act.date}
-                  </span>
-                </div>
-                <p className="text-pink-400 font-medium mb-3 flex items-center">
-                  <span className="w-2 h-2 bg-pink-500 rounded-full mr-2"></span> {act.role}
-                </p>
-                <p className="text-gray-300 leading-relaxed text-sm">{act.description}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* 6. BLOG POSTS */}
-      <BlogSection posts={blogPosts} />
-
-      {/* 7. TIMELINE */}
-      <section className="max-w-5xl mx-auto mb-32 grid md:grid-cols-2 gap-12 relative z-10">
-        <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-          <h3 className="text-2xl font-bold mb-8 flex items-center">
-            <GraduationCap className="mr-3 text-purple-400" /> Education
-          </h3>
-          <div className="space-y-8 border-l-2 border-white/10 pl-8 ml-3 relative">
-            <div className="relative group">
-              <span className="absolute -left-[41px] top-1 w-5 h-5 bg-purple-500 rounded-full border-4 border-[#0a0a0a] group-hover:scale-125 transition-transform"></span>
-              <h4 className="text-xl font-bold text-white">HUTECH University</h4>
-              <p className="text-purple-400 text-sm mb-2 font-mono">2022 - 2026</p>
-              <p className="text-gray-300">Bachelor of Software Engineering</p>
-              <p className="text-gray-500 text-sm mt-1">GPA: 3.27/4.0</p>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-          <h3 className="text-2xl font-bold mb-8 flex items-center">
-            <Briefcase className="mr-3 text-blue-400" /> Experience
-          </h3>
-          <div className="space-y-8 border-l-2 border-white/10 pl-8 ml-3 relative">
-            <div className="relative group">
-              <span className="absolute -left-[41px] top-1 w-5 h-5 bg-blue-500 rounded-full border-4 border-[#0a0a0a] group-hover:scale-125 transition-transform"></span>
-              <h4 className="text-xl font-bold text-white">Backend Developer Intern</h4>
-              <p className="text-blue-400 text-sm mb-2 font-mono">Apr 2025 - Jun 2025</p>
-              <p className="text-gray-300">Academic Project Team</p>
-              <p className="text-gray-500 text-sm mt-1">Built IELTS LMS using ASP.NET Core & SQL Server.</p>
-            </div>
-            <div className="relative group">
-              <span className="absolute -left-[41px] top-1 w-5 h-5 bg-blue-500 rounded-full border-4 border-[#0a0a0a] group-hover:scale-125 transition-transform"></span>
-              <h4 className="text-xl font-bold text-white">Full-Stack Developer</h4>
-              <p className="text-blue-400 text-sm mb-2 font-mono">Mar 2025 - Jun 2025</p>
-              <p className="text-gray-300">Freelance / Project</p>
-              <p className="text-gray-500 text-sm mt-1">Developed Real-time Cinema Booking using Node.js & Socket.io.</p>
-            </div>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* 8. CONTACT CTA */}
-      <section className="max-w-4xl mx-auto mb-20 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30 rounded-2xl p-8 md:p-12 text-center"
-        >
-          <h2 className="text-3xl font-bold mb-4">Let's Work Together</h2>
-          <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
-            Tôi đang tìm kiếm cơ hội thực tập và làm việc full-time trong lĩnh vực Backend Development,
-            AI/LLM, hoặc Full-Stack. Hãy liên hệ nếu bạn có dự án thú vị!
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-4 mb-6">
-            <a href={`mailto:${profile?.email}`} className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-all hover:scale-105 flex items-center gap-2">
-              <Mail size={18} />
-              Email Me
-            </a>
-            <a href={profile?.github} target="_blank" className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-full transition-all hover:scale-105 flex items-center gap-2">
-              <Github size={18} />
-              GitHub
-            </a>
-            <a href={profile?.linkedin} target="_blank" className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-full transition-all hover:scale-105 flex items-center gap-2">
-              <Linkedin size={18} />
-              LinkedIn
-            </a>
-          </div>
-
-          <p className="text-sm text-gray-500">
-            Response time: Thường trong vòng 24 giờ
-          </p>
-        </motion.div>
+        <BlogSection posts={blogPosts} />
+        {/* Lưu ý: Bạn cần vào file BlogSection.tsx sửa lại class text-white -> text-slate-900 tương tự như trên */}
       </section>
 
       {/* Footer */}
-      <footer className="py-8 text-center text-gray-600 text-sm relative z-10 border-t border-white/5">
-        <p>© {new Date().getFullYear()} Nguyen Tran Ngoc Han. Built with Go & Next.js</p>
-        <p className="mt-2 text-xs">Deployed on Render (Backend) & Vercel (Frontend)</p>
+      <footer className="bg-white border-t border-slate-200 py-12 text-center">
+        <div className="flex justify-center gap-6 mb-8 text-slate-400">
+          <Github className="hover:text-slate-900 cursor-pointer transition-colors" />
+          <Linkedin className="hover:text-blue-700 cursor-pointer transition-colors" />
+          <Mail className="hover:text-red-500 cursor-pointer transition-colors" />
+        </div>
+        <p className="text-slate-500 text-sm">
+          © {new Date().getFullYear()} Nguyen Tran Ngoc Han. <br />
+          Built with <span className="text-slate-900 font-medium">Go (Gin)</span> & <span className="text-slate-900 font-medium">Next.js</span>. Deployed on Render/Vercel.
+        </p>
       </footer>
     </main>
   );
