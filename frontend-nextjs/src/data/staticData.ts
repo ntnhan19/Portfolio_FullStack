@@ -1,4 +1,5 @@
 // src/data/staticData.ts
+
 export interface Project {
   id: number;
   title: string;
@@ -6,35 +7,43 @@ export interface Project {
   content: string;
   tech_stack: string;
   category: string;
-  repo_url?: string; 
-  demo_url?: string; 
+  repo_url?: string;
+  demo_url?: string;
   image_url: string;
   highlights?: string;
   duration?: string;
   team_size?: string;
 }
 
+export interface BlogPost {
+  id: number;
+  title: string;
+  summary: string;
+  content: string;
+  cover_image: string;
+  tags: string;
+  date: string;
+}
 
 export const profile = {
   full_name: "Nguyễn Trần Ngọc Hân",
-  title: "Sinh viên Kỹ thuật Phần mềm | Đam mê lập trình Java & JavaScript",
-  bio: `Xin chào! Tôi là Hân, sinh viên năm 4 chuyên ngành Kỹ thuật Phần mềm tại HUTECH.
-  
-  **Về tôi:**
-  - Đam mê lập trình Java (Spring Boot) và JavaScript (React, Node.js)
-  - Thích chia sẻ kiến thức qua blog cá nhân
-  - Tham gia các dự án học thuật và hackathon
-  
-  **Mục tiêu:**
-  - Trở thành Backend Developer chuyên nghiệp
-  - Đóng góp vào cộng đồng lập trình Việt Nam
-  - Học hỏi và phát triển kỹ năng mỗi ngày`,
+  title: "Sinh viên Kỹ thuật Phần mềm | Ứng viên Backend Developer Intern",
+  bio: `Là sinh viên năm 4 chuyên ngành Kỹ thuật Phần mềm tại HUTECH, tôi đã xây dựng nền tảng vững chắc về Backend Development thông qua các dự án học thuật và tự học.
+
+**Điểm mạnh:**
+- Xây dựng RESTful API với Go (Gin) và Node.js (Express)
+- Thiết kế database schema và tối ưu query với PostgreSQL
+- Xử lý real-time communication với WebSocket/Socket.io
+- Làm việc với AI/LLM: RAG pipeline, Vector Database (Pinecone)
+
+**Mục tiêu:** Tìm kiếm vị trí Backend Developer Intern tại các công ty công nghệ để học hỏi kinh nghiệm thực tế về hệ thống quy mô lớn, microservices architecture và best practices từ các senior developers.`,
   email: "ngochanpt2018@gmail.com",
   github: "https://github.com/ntnhan19",
   linkedin: "https://linkedin.com/in/nguyentranngochan"
 };
 
-export const blogPosts = [
+// Giữ nguyên Blog cũ (Java/JS) để portfolio trông đầy đặn
+export const blogPosts: BlogPost[] = [
   {
     id: 1,
     title: "Java Collections Framework: ArrayList vs LinkedList",
@@ -186,93 +195,7 @@ export const blogPosts = [
   // myAccount.balance;      // undefined - không truy cập trực tiếp được!
   \`\`\`
   
-  ### 2.2. Function Factory
-  
-  \`\`\`javascript
-  function makeMultiplier(factor) {
-    return function(number) {
-      return number * factor;
-    };
-  }
-  
-  const double = makeMultiplier(2);
-  const triple = makeMultiplier(3);
-  
-  console.log(double(5));   // 10
-  console.log(triple(5));   // 15
-  \`\`\`
-  
-  ### 2.3. Event Handlers với private state
-  
-  \`\`\`javascript
-  function setupButton(buttonId) {
-    let clickCount = 0;
-    
-    document.getElementById(buttonId).addEventListener('click', function() {
-      clickCount++;
-      console.log(\`Button clicked \${clickCount} times\`);
-    });
-  }
-  
-  setupButton('myButton');
-  \`\`\`
-  
-  ## 3. Common Pitfalls
-  
-  ### Pitfall 1: Loop với var
-  
-  \`\`\`javascript
-  // ❌ SAI
-  for (var i = 0; i < 3; i++) {
-    setTimeout(function() {
-      console.log(i);  // In ra: 3, 3, 3
-    }, 1000);
-  }
-  
-  // ✅ ĐÚNG - Dùng let
-  for (let i = 0; i < 3; i++) {
-    setTimeout(function() {
-      console.log(i);  // In ra: 0, 1, 2
-    }, 1000);
-  }
-  
-  // ✅ ĐÚNG - Dùng IIFE
-  for (var i = 0; i < 3; i++) {
-    (function(j) {
-      setTimeout(function() {
-        console.log(j);  // In ra: 0, 1, 2
-      }, 1000);
-    })(i);
-  }
-  \`\`\`
-  
-  ### Pitfall 2: Memory Leaks
-  
-  \`\`\`javascript
-  // ❌ Có thể gây memory leak
-  function attachHandler() {
-    let largeData = new Array(1000000).fill('data');
-    
-    document.getElementById('btn').addEventListener('click', function() {
-      console.log('Clicked');
-      // largeData vẫn bị giữ trong memory!
-    });
-  }
-  
-  // ✅ Giải phóng memory
-  function attachHandler() {
-    let largeData = new Array(1000000).fill('data');
-    
-    const handler = function() {
-      console.log('Clicked');
-    };
-    
-    document.getElementById('btn').addEventListener('click', handler);
-    largeData = null;  // Giải phóng
-  }
-  \`\`\`
-  
-  ## 4. Kết luận
+  ## 3. Kết luận
   
   **Ưu điểm Closures:**
   - Encapsulation (private variables)
@@ -281,364 +204,296 @@ export const blogPosts = [
   
   **Nhược điểm:**
   - Có thể gây memory leaks nếu không cẩn thận
-  - Khó debug hơn
-  - Performance overhead nhỏ
-  
-  **Best Practices:**
-  - Chỉ dùng khi thực sự cần private state
-  - Tránh tạo closures trong loop với var
-  - Luôn null-ify large objects khi không cần
-  
-  ## Tham khảo
-  - [MDN - Closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)
-  - [You Don't Know JS - Scope & Closures](https://github.com/getify/You-Dont-Know-JS)`,
+  - Khó debug hơn`,
     cover_image: "/images/blog/js-closures.jpg",
     tags: "JavaScript,Fundamentals",
     date: "18/12/2024"
-  },
-  {
-    id: 3,
-    title: "Java Stream API: Lập trình hàm trong Java 8+",
-    summary: "Stream API giúp code Java ngắn gọn và dễ đọc hơn. Tìm hiểu cách sử dụng map, filter, reduce hiệu quả.",
-    content: `# Java Stream API: Lập trình hàm trong Java 8+
-  
-  ## Giới thiệu Stream API
-  
-  Stream API (Java 8+) cho phép xử lý collections theo phong cách **functional programming**, giúp code ngắn gọn và dễ đọc hơn.
-  
-  ## 1. Tạo Stream
-  
-  \`\`\`java
-  // Từ Collection
-  List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
-  Stream<Integer> stream = numbers.stream();
-  
-  // Từ Array
-  String[] names = {"Nam", "Hân", "Linh"};
-  Stream<String> nameStream = Arrays.stream(names);
-  
-  // Từ values trực tiếp
-  Stream<String> stream = Stream.of("A", "B", "C");
-  
-  // Infinite stream
-  Stream<Integer> infiniteStream = Stream.iterate(0, n -> n + 1);
-  \`\`\`
-  
-  ## 2. Intermediate Operations (Lazy)
-  
-  ### 2.1. filter() - Lọc phần tử
-  
-  \`\`\`java
-  List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-  
-  List<Integer> evenNumbers = numbers.stream()
-      .filter(n -> n % 2 == 0)
-      .collect(Collectors.toList());
-  // Result: [2, 4, 6]
-  \`\`\`
-  
-  ### 2.2. map() - Transform
-  
-  \`\`\`java
-  List<String> names = Arrays.asList("nam", "hân", "linh");
-  
-  List<String> upperNames = names.stream()
-      .map(String::toUpperCase)
-      .collect(Collectors.toList());
-  // Result: ["NAM", "HÂN", "LINH"]
-  \`\`\`
-  
-  ### 2.3. flatMap() - Flatten nested structures
-  
-  \`\`\`java
-  List<List<Integer>> nestedList = Arrays.asList(
-      Arrays.asList(1, 2),
-      Arrays.asList(3, 4),
-      Arrays.asList(5, 6)
-  );
-  
-  List<Integer> flatList = nestedList.stream()
-      .flatMap(Collection::stream)
-      .collect(Collectors.toList());
-  // Result: [1, 2, 3, 4, 5, 6]
-  \`\`\`
-  
-  ## 3. Terminal Operations (Eager)
-  
-  ### 3.1. collect() - Thu thập kết quả
-  
-  \`\`\`java
-  List<String> names = Arrays.asList("Nam", "Hân", "Linh");
-  
-  // To List
-  List<String> list = names.stream().collect(Collectors.toList());
-  
-  // To Set
-  Set<String> set = names.stream().collect(Collectors.toSet());
-  
-  // To Map
-  Map<String, Integer> nameLength = names.stream()
-      .collect(Collectors.toMap(
-          name -> name,
-          String::length
-      ));
-  \`\`\`
-  
-  ### 3.2. reduce() - Gộp thành 1 giá trị
-  
-  \`\`\`java
-  List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
-  
-  // Tổng
-  int sum = numbers.stream()
-      .reduce(0, (a, b) -> a + b);
-  // Result: 15
-  
-  // Tích
-  int product = numbers.stream()
-      .reduce(1, (a, b) -> a * b);
-  // Result: 120
-  
-  // Max
-  Optional<Integer> max = numbers.stream()
-      .reduce(Integer::max);
-  \`\`\`
-  
-  ### 3.3. forEach() - Thực hiện action
-  
-  \`\`\`java
-  List<String> names = Arrays.asList("Nam", "Hân", "Linh");
-  
-  names.stream()
-      .forEach(System.out::println);
-  \`\`\`
-  
-  ## 4. Ví dụ thực tế
-  
-  ### Ví dụ 1: Xử lý danh sách Student
-  
-  \`\`\`java
-  class Student {
-      String name;
-      int age;
-      double gpa;
-      
-      // Constructor, getters, setters
-  }
-  
-  List<Student> students = Arrays.asList(
-      new Student("Nam", 20, 3.5),
-      new Student("Hân", 21, 3.8),
-      new Student("Linh", 19, 3.2)
-  );
-  
-  // Tìm sinh viên GPA > 3.5
-  List<Student> topStudents = students.stream()
-      .filter(s -> s.getGpa() > 3.5)
-      .collect(Collectors.toList());
-  
-  // Tính GPA trung bình
-  double avgGPA = students.stream()
-      .mapToDouble(Student::getGpa)
-      .average()
-      .orElse(0.0);
-  
-  // Lấy danh sách tên, sắp xếp theo tuổi
-  List<String> sortedNames = students.stream()
-      .sorted(Comparator.comparing(Student::getAge))
-      .map(Student::getName)
-      .collect(Collectors.toList());
-  \`\`\`
-  
-  ### Ví dụ 2: Group By
-  
-  \`\`\`java
-  // Nhóm sinh viên theo độ tuổi
-  Map<Integer, List<Student>> byAge = students.stream()
-      .collect(Collectors.groupingBy(Student::getAge));
-  
-  // Nhóm và đếm
-  Map<Integer, Long> countByAge = students.stream()
-      .collect(Collectors.groupingBy(
-          Student::getAge,
-          Collectors.counting()
-      ));
-  \`\`\`
-  
-  ## 5. Performance Tips
-  
-  ### Sử dụng Parallel Stream
-  
-  \`\`\`java
-  // Sequential (mặc định)
-  long count = list.stream()
-      .filter(...)
-      .count();
-  
-  // Parallel (multi-thread)
-  long count = list.parallelStream()
-      .filter(...)
-      .count();
-  \`\`\`
-  
-  **Khi nào dùng parallelStream():**
-  - Dataset lớn (> 10,000 elements)
-  - Operations CPU-intensive
-  - Không có shared mutable state
-  
-  **Khi KHÔNG nên dùng:**
-  - Dataset nhỏ (overhead > benefit)
-  - I/O operations
-  - Order-dependent operations
-  
-  ## 6. Kết luận
-  
-  **Ưu điểm Stream API:**
-  - Code ngắn gọn, dễ đọc
-  - Lazy evaluation (hiệu quả)
-  - Có thể parallel dễ dàng
-  
-  **Nhược điểm:**
-  - Debug khó hơn
-  - Learning curve cao hơn loop thông thường
-  
-  **Best Practices:**
-  - Ưu tiên Stream cho operations phức tạp
-  - Dùng loop thông thường cho simple cases
-  - Cẩn thận với parallelStream()
-  
-  ## Tham khảo
-  - [Java Docs - Stream API](https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html)
-  - [Baeldung - Java 8 Streams](https://www.baeldung.com/java-8-streams)`,
-    cover_image: "/images/blog/java-streams.jpg",
-    tags: "Java,Functional Programming",
-    date: "20/12/2024"
-  },
-  // ... Thêm 6 bài nữa tương tự
-  {
-    id: 4,
-    title: "JavaScript Promises và Async/Await: Xử lý bất đồng bộ",
-    summary: "Từ callback hell đến async/await - cách viết code bất đồng bộ sạch đẹp trong JavaScript.",
-    content: `# JavaScript Promises và Async/Await
-  
-  ## Coming soon - Bài viết đang hoàn thiện...`,
-    cover_image: "/images/blog/js-async.jpg",
-    tags: "JavaScript,Async",
-    date: "22/12/2024"
-  },
-  {
-    id: 5,
-    title: "Java Exception Handling: Best Practices",
-    summary: "Cách xử lý exceptions đúng chuẩn trong Java - try-catch, custom exceptions, và error handling patterns.",
-    content: `# Java Exception Handling Best Practices
-  
-  ## Coming soon - Bài viết đang hoàn thiện...`,
-    cover_image: "/images/blog/java-exceptions.jpg",
-    tags: "Java,Error Handling",
-    date: "23/12/2024"
-  },
-  {
-    id: 6,
-    title: "JavaScript ES6+: Arrow Functions và Destructuring",
-    summary: "Các tính năng mới của ES6 giúp code JavaScript hiện đại và ngắn gọn hơn.",
-    content: `# JavaScript ES6+ Features
-  
-  ## Coming soon - Bài viết đang hoàn thiện...`,
-    cover_image: "/images/blog/js-es6.jpg",
-    tags: "JavaScript,ES6",
-    date: "24/12/2024"
-  },
-  {
-    id: 7,
-    title: "Java Spring Boot cơ bản: REST API đầu tiên",
-    summary: "Hướng dẫn từng bước xây dựng REST API với Spring Boot cho người mới bắt đầu.",
-    content: `# Spring Boot REST API Tutorial
-  
-  ## Coming soon - Bài viết đang hoàn thiện...`,
-    cover_image: "/images/blog/spring-boot.jpg",
-    tags: "Java,Spring Boot",
-    date: "25/12/2024"
-  },
-  {
-    id: 8,
-    title: "JavaScript Design Patterns: Module và Singleton",
-    summary: "Các design patterns thường dùng trong JavaScript để tổ chức code tốt hơn.",
-    content: `# JavaScript Design Patterns
-  
-  ## Coming soon - Bài viết đang hoàn thiện...`,
-    cover_image: "/images/blog/js-patterns.jpg",
-    tags: "JavaScript,Design Patterns",
-    date: "26/12/2024"
-  },
-  {
-    id: 9,
-    title: "Java vs JavaScript: So sánh chi tiết cho người mới",
-    summary: "Giải đáp thắc mắc: Java và JavaScript khác nhau như thế nào? Nên học cái nào trước?",
-    content: `# Java vs JavaScript: Chi tiết từ A-Z
-  
-  ## Coming soon - Bài viết đang hoàn thiện...`,
-    cover_image: "/images/blog/java-vs-js.jpg",
-    tags: "Java,JavaScript,Comparison",
-    date: "27/12/2024"
   }
 ];
 
 export const projects: Project[] = [
   {
     id: 1,
-    title: "Java Spring MVC Blog System",
-    description: "Hệ thống blog đầy đủ với Spring MVC, Hibernate và MySQL. Quản lý bài viết, comment và user authentication.",
-    content: "## Chi tiết dự án...",
-    tech_stack: "Java, Spring MVC, Hibernate, MySQL, Bootstrap",
-    category: "Java Web",
-    repo_url: "https://github.com/ntnhan19",
-    image_url: "/images/projects/java-blog.jpg",
-    highlights: "Academic Project,Spring MVC,Authentication",
-    duration: "2 tháng",
-    team_size: "2 người"
+    title: "DocMentor - AI RAG Knowledge Assistant",
+    description: "Ứng dụng AI Assistant hỗ trợ trả lời câu hỏi từ tài liệu PDF/DOCX sử dụng công nghệ RAG và Vector Database. Đồ án môn Trí tuệ nhân tạo.",
+    content: `## 🎯 Bối cảnh dự án
+
+Đây là dự án của học phần **Đồ Án Chuyên Ngành** học kỳ 1 năm 2025. Bài toán đặt ra: Sinh viên và giảng viên thường phải đọc hàng trăm trang tài liệu để tìm thông tin cần thiết. Làm sao để AI có thể "đọc hiểu" tài liệu và trả lời câu hỏi chính xác?
+
+## 🏗️ Kiến trúc hệ thống
+
+### Tech Stack
+- **Backend**: Python FastAPI
+- **AI Framework**: LangChain
+- **LLM**: Google Gemini Pro (miễn phí cho sinh viên)
+- **Vector Database**: Pinecone (Free tier)
+- **Frontend**: React.js + Tailwind CSS
+
+### Luồng hoạt động
+
+1. User upload PDF/DOCX
+2. Backend chia nhỏ document thành chunks (512 tokens, overlap 50)
+3. Sử dụng Sentence Transformers để tạo embeddings
+4. Lưu embeddings vào Pinecone
+5. User đặt câu hỏi → Vector search tìm chunks liên quan
+6. Gemini Pro generate câu trả lời dựa trên context
+
+## ⚙️ Tính năng đã thực hiện
+
+### 1. Document Processing
+- Upload PDF, DOCX, TXT (max 10MB)
+- Chunking thông minh với RecursiveCharacterTextSplitter
+- Extract metadata (tên file, số trang, ngày tạo)
+
+### 2. RAG Pipeline
+- Vector similarity search với k=5 chunks most relevant
+- Context window 2000 tokens
+- Streaming response (hiển thị từng token)
+
+### 3. Chat Interface
+- History conversation (lưu trong session)
+- Syntax highlighting cho code blocks
+- Copy answer to clipboard
+
+## 📊 Kết quả đạt được
+
+**Về chức năng:**
+- ✅ Xử lý thành công 95% documents được test (50 files)
+- ✅ Trả lời chính xác với câu hỏi liên quan trực tiếp đến nội dung
+- ✅ Response time trung bình: 3-5 giây
+
+**Về mặt học thuật:**
+- Đạt điểm 9/10 cho học phần Đồ Án Chuyên Ngành
+- Được thầy đánh giá cao về khả năng apply lý thuyết vào thực tế
+- Present trước lớp và nhận feedback tích cực
+
+## 💡 Những gì đã học được
+
+### 1. Technical Skills
+- Hiểu rõ cách LLM hoạt động và limitations
+- Học cách làm việc với Vector Database
+- Tối ưu cost khi call API (cache, batch processing)
+
+### 2. Problem Solving
+- **Vấn đề:** Chunking không tốt làm mất ngữ cảnh
+  - **Giải pháp:** Thêm overlap và metadata cho mỗi chunk
+- **Vấn đề:** Gemini đôi khi "hallucinate" (bịa đặt thông tin)
+  - **Giải pháp:** Thêm instruction "chỉ trả lời dựa trên context, nếu không biết thì nói không biết"
+
+### 3. Soft Skills
+- Làm việc nhóm 3 người, phân chia task rõ ràng
+- Present demo trước 40+ bạn và 2 giảng viên
+- Viết document kỹ thuật đầy đủ`,
+    tech_stack: "Python, FastAPI, LangChain, Google Gemini API, Pinecone, React.js",
+    category: "AI/Machine Learning",
+    repo_url: "https://github.com/ntnhan19/DocMentor",
+    image_url: "/images/projects/docmentor.png",
+    highlights: "Academic Project,RAG Pipeline,Vector Search",
+    duration: "3 tháng (Sep - Dec 2025)",
+    team_size: "3 người"
   },
   {
     id: 2,
-    title: "JavaScript Task Manager SPA",
-    description: "Single Page Application quản lý công việc với vanilla JavaScript, localStorage và drag-and-drop.",
-    content: "## Chi tiết dự án...",
-    tech_stack: "JavaScript, HTML5, CSS3, LocalStorage",
-    category: "JavaScript Web",
-    repo_url: "https://github.com/ntnhan19",
-    image_url: "/images/projects/js-taskmanager.jpg",
-    highlights: "Academic Project,SPA,Drag and Drop",
-    duration: "1 tháng",
-    team_size: "Solo"
+    title: "DHL Cinema - Hệ thống đặt vé xem phim Real-time",
+    description: "Web application đặt vé xem phim với WebSocket, xử lý race condition khi nhiều người cùng chọn ghế. Đồ án môn Lập trình mạng.",
+    content: `## 🎯 Bối cảnh dự án
+
+Đây là dự án của học phần **Đồ Án Cơ Sở** học kỳ 1 năm 2024. Giảng viên đặt yêu cầu: Xây dựng một hệ thống có tính năng real-time và phải xử lý được vấn đề race condition.
+
+**Bài toán cụ thể:** Khi 100 người cùng lúc chọn 1 ghế trong rạp chiếu phim, làm sao đảm bảo chỉ 1 người book thành công?
+
+## 🏗️ Kiến trúc hệ thống
+
+### Tech Stack
+- **Backend**: Node.js + Express.js
+- **Real-time**: Socket.io (WebSocket)
+- **Database**: PostgreSQL
+- **Cache & Locking**: Redis
+- **Frontend**: React.js + Context API
+
+### Sơ đồ luồng xử lý
+
+Client chọn ghế
+    ↓
+Socket.io emit 'select-seat'
+    ↓
+Server check Redis lock
+    ↓
+Nếu lock thành công → Update PostgreSQL → Broadcast
+Nếu lock thất bại → Return error
+
+## ⚙️ Giải pháp kỹ thuật
+
+### 1. Redis Distributed Lock
+
+\`\`\`javascript
+// Acquire lock với expire time 30s
+const lockKey = \`seat:\${movieId}:\${seatId}\`;
+const acquired = await redis.set(
+  lockKey, 
+  userId, 
+  'EX', 30,  // Auto expire sau 30s
+  'NX'       // Chỉ set nếu key chưa tồn tại
+);
+
+if (!acquired) {
+  throw new Error('Ghế đã được chọn');
+}
+\`\`\`
+
+### 2. WebSocket Broadcasting
+
+\`\`\`javascript
+io.to(\`room-\${movieId}\`).emit('seat:updated', {
+  seatId,
+  status: 'locked',
+  userId,
+  timestamp: Date.now()
+});
+\`\`\`
+
+### 3. Database Transaction
+
+\`\`\`javascript
+await db.transaction(async (trx) => {
+  // Lock row để đảm bảo consistency
+  const seat = await trx('seats')
+    .where({ id: seatId })
+    .forUpdate()
+    .first();
+   
+  if (seat.status !== 'available') {
+    throw new Error('Ghế không khả dụng');
+  }
+   
+  await trx('bookings').insert({...});
+  await trx('seats').update({ status: 'locked' });
+});
+\`\`\`
+
+## 📊 Kết quả testing
+
+### Load Test với Artillery
+- **Test case:** 100 users cùng lúc chọn 1 ghế
+- **Kết quả:** Chỉ 1 request thành công, 99 requests nhận error
+- **Response time:** 150-200ms
+- **Zero double booking:** ✅
+
+### Test thực tế
+- Mời 10 bạn cùng lớp test đồng thời
+- Kết quả: Hệ thống hoạt động ổn định
+- Feedback: UI real-time mượt mà
+
+## 💡 Những gì đã học được
+
+### 1. Technical Knowledge
+- Hiểu sâu về WebSocket và cách nó khác HTTP
+- Học cách implement distributed lock pattern
+- Thực hành database transaction và row-level locking
+
+### 2. Debugging Skills
+- **Bug 1:** Redis lock không release khi server crash
+  - **Fix:** Dùng EXPIRE để auto-release
+- **Bug 2:** WebSocket disconnect/reconnect liên tục
+  - **Fix:** Implement heartbeat mechanism
+
+## 🏆 Kết quả đạt được
+
+- Điểm đồ án: 9.0/10
+
+## 🎓 Reflection
+
+Dự án này giúp tôi hiểu rằng:
+- Distributed systems không đơn giản như tưởng
+- Testing với race condition cần cẩn thận và có methodology
+- Real-world problems thường phức tạp hơn lý thuyết rất nhiều`,
+    tech_stack: "Node.js, Express, Socket.io, PostgreSQL, Redis",
+    category: "Network Programming",
+    repo_url: "https://github.com/ntnhan19/Project_MovieTicketBooking_NodeJS",
+    image_url: "/images/projects/cinema.png",
+    highlights: "Academic Project,Real-time System,Race Condition Handling",
+    duration: "3 tháng (Mar - Jun 2025)",
+    team_size: "3 người"
   }
 ];
 
 export const certificates = [
   {
     id: 1,
-    name: "Java Programming Certificate",
-    issuer: "HUTECH University",
-    type: "Course",
-    date: "Tháng 6/2024",
-    image_url: "/images/certs/java-cert.jpg"
+    name: "Sinh viên 5 Tốt Cấp Khoa",
+    issuer: "Đại học Công nghệ TP.HCM (HUTECH)",
+    type: "Title",
+    date: "2024",
+    image_url: "/images/certs/sv5tot.jpg"
   },
   {
     id: 2,
-    name: "JavaScript Essentials",
+    name: "Sinh viên Tiêu Biểu Cấp Khoa",
+    issuer: "Khoa Công nghệ Thông tin - HUTECH",
+    type: "Title",
+    date: "2024",
+    image_url: "/images/certs/svtbieu.jpg"
+  },
+  {
+    id: 3,
+    name: "Networking Basics",
+    issuer: "Cisco Networking Academy",
+    type: "Course",
+    date: "Tháng 12/2024",
+    image_url: "/images/certs/cisco_basics.jpg",
+    url: "https://www.credly.com/badges/849ccbed-8429-4e57-a3be-e3177f447cce/public_url"
+  },
+  {
+    id: 4,
+    name: "JavaScript Essentials 1",
+    issuer: "Cisco Networking Academy",
+    type: "Course",
+    date: "Tháng 12/2024",
+    image_url: "/images/certs/javascript1.jpg",
+    url: "https://www.credly.com/badges/04dcaaad-cc55-4403-af59-ad15cd36150f/public_url"
+  },
+  {
+    id: 5,
+    name: "JavaScript Essentials 2",
     issuer: "Cisco Networking Academy",
     type: "Course",
     date: "Tháng 12/2024",
     image_url: "/images/certs/javascript2.jpg",
     url: "https://www.credly.com/badges/7b330edf-fa4c-46d6-ac25-74e50e2c3773/public_url"
+  },
+  {
+    id: 6,
+    name: "Giải Ba - Cuộc thi Genz's Thinking",
+    issuer: "CLB Đổi mới Sáng tạo HUTECH",
+    type: "Award",
+    date: "Tháng 10/2024",
+    image_url: "/images/certs/genz_award.jpg"
+  },
+  {
+    id: 7,
+    name: "Giải Ba - PIONE DREAM HACKATHON 2025",
+    issuer: "Đại học HUTECH",
+    type: "Award",
+    date: "Tháng 1/2025",
+    image_url: "/images/certs/pionehackathon.jpg"
   }
 ];
 
 export const activities = [
   {
     id: 1,
-    name: "Coding Club HUTECH",
-    role: "Thành viên",
-    description: "Tham gia các buổi workshop về Java và JavaScript, chia sẻ kiến thức với các bạn sinh viên khác.",
-    date: "2024",
-    image_url: "/images/activities/coding-club.jpg"
+    name: "Hội Thao Sinh Viên HUTECH 2024",
+    role: "Vận động viên - Đội Bóng Đá Nữ Khoa CNTT",
+    description: "Tham gia thi đấu bộ môn Bóng đá nữ, đạt giải Nhì toàn trường. Hoạt động rèn luyện sức khỏe, tinh thần đồng đội và kết nối với các bạn sinh viên khác khoa.",
+    date: "Tháng 3/2024",
+    image_url: "/images/activities/hoithao.jpg"
+  },
+  {
+    id: 2,
+    name: "Tết Đầy Đủ - Xuân Trọn Vẹn 2025",
+    role: "Tình nguyện viên - Liên Chi Hội Khoa CNTT",
+    description: "Tham gia gói quà Tết cho người nghèo tại Thành phố Hồ Chí Minh. Hoạt động kéo dài 2 ngày với 50+ tình nguyện viên, gói được 500+ phần quà.",
+    date: "Tháng 1/2025",
+    image_url: "/images/activities/tinhnguyenvien.png"
   }
 ];
