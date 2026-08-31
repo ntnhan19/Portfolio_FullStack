@@ -206,6 +206,7 @@ export const projects: Project[] = [
     year: 2025,
     repo_url: "https://github.com/ntnhan19/DHLCinema",
     demo_url: "https://dhl-cinema-user.vercel.app",
+    video_url: "https://youtu.be/NS_g0xm5bN0",
     image_url: `${BASE_PATH}/images/projects/cinema.png`,
     hover_image_url: "/images/projects/dhlcinema/realtime-booking.gif",
     featured: true,
